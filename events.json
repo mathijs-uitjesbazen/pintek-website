@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "date": "2026-03-26",
+    "location": "Amsterdam",
+    "address": "Arena XYZ",
+    "ticketLink": "https://tickets.example.com"
+  },
+  {
+    "id": 2,
+    "date": "2026-04-10",
+    "location": "Rotterdam",
+    "address": "Ahoy",
+    "ticketLink": "https://tickets.example.com/festival"
+  },
+  {
+    "id": 1774547241450,
+    "date": "2026-05-30",
+    "location": "Meadow Events",
+    "address": "Rijkevoort",
+    "ticketLink": "https://sales.ticketing.cm.com/meadow2026/nl-nl/fd24643d-1f3a-4171-82c2-b0dd870c580f"
+  }
+]

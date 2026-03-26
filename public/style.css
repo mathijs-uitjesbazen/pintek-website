@@ -1,0 +1,245 @@
+/* Algemeen */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #0f1116;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;  /* logo links, nav rechts */
+    align-items: center;
+    padding: 15px 30px;              /* minder padding rechts, zodat nav in beeld blijft */
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    background: rgba(15,17,22,0.8);
+    box-sizing: border-box;          /* voorkomt overflow door padding */
+}
+
+/* Logo links */
+header .logo-small {
+    height: 25px;
+}
+
+/* Nav-items */
+header nav {
+    display: flex;
+    align-items: center;
+}
+
+header nav a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px;       /* marge tussen links en iconen */
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav a:hover {
+    color: #bac0cc;
+}
+
+/* SVG iconen */
+.social-icon {
+    width: 22px;
+    height: 22px;
+    color: white;
+    transition: color 0.3s; 
+}
+
+.soundcloud-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.social-icon:hover {
+    color: #bac0cc;
+}
+
+/* Hero Section */
+#hero {
+    min-height: 100vh;
+    background: url('assets/achtergrond.jpeg') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.hero-logo {
+    width: 700px;
+    animation: flyIn 1.5s ease-out forwards;
+}
+
+@keyframes flyIn {
+    0% { transform: translateY(-200px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Secties */
+.section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    padding-left: 80px; /* ruimte voor label + lijn */
+    align-items: center;
+    justify-content: center;
+}
+
+.section-content {
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* gecentreerd behalve Tour Agenda */
+}
+
+/* Verticale label met lijn via pseudo-element */
+.vertical-label {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 1.2rem;
+    color: #bac0cc;
+    font-weight: bold;
+}
+
+.vertical-label::after {
+    content: "";
+    display: inline-block;
+    width: 2px;
+    height: 500px;      /* hoogte van de lijn, pas aan */
+    background-color: #bac0cc;
+    margin-top: 10px; /* afstand tussen lijn en label */
+}
+
+/* About Me section */
+#about .section-content {
+    display: flex;              /* naast elkaar */
+    flex-direction: row;        /* horizontaal */
+    align-items: flex-start;    /* boven uitlijnen */
+    gap: 30px;                  /* ruimte tussen foto en tekst */
+    justify-content: flex-start; /* alles links */
+    max-width: 1000px;          /* voorkomt te brede content */
+    margin: 0 auto;             /* centrum op pagina */
+}
+
+#about .section-content img {
+    max-width: 300px;           /* foto niet te groot */
+    height: auto;
+    object-fit: cover;          /* behoud verhouding */
+    flex-shrink: 0;             /* niet kleiner dan max-width */
+}
+
+#about .section-content p {
+    font-size: 1.1rem;
+    color: #ffffff;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.carousel {
+    overflow-x: auto;              /* horizontaal scrollen */
+    overflow-y: hidden;
+    padding-bottom: 10px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.carousel-track {
+    display: flex;                 /* items naast elkaar */
+    gap: 20px;                     /* ruimte tussen items */
+}
+
+.carousel-item {
+    flex: 0 0 auto;                /* voorkom krimpen */
+    display: flex;
+    flex-direction: column;        /* iframe boven, caption onder */
+    align-items: center;
+}
+
+.track-caption {
+    font-size: 12px;
+    color: #ccc;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.carousel-track iframe {
+    border-radius: 8px;
+}
+
+/* Tour Agenda kaarten */
+#tour .section-content {
+    align-items: stretch;
+}
+
+.event-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #616775;
+    background-color: #20232b;
+    padding: 15px;
+    margin: 0;
+}
+
+.event-card:hover {
+    background-color: #2a2d38; /* subtiel donkerder op hover */
+    transform: translateY(-2px); /* kleine lift-effect */
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.event-card:last-child {
+    border-bottom: none;
+}
+
+.event-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.event-date {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #bac0cc;
+    margin-bottom: 2px;
+}
+
+.event-location {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 2px;
+}
+
+.event-address {
+    font-size: 0.85rem;
+    color: #888888;
+}
+
+.ticket-btn {
+    padding: 6px 12px;
+    background-color: #bac0cc;
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 0;
+    flex-shrink: 0;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px;
+    background-color: #20232b;
+    color: #aaa;
+}

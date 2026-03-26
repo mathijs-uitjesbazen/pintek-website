@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Admin: Events beheren</h1>
+
+    <form id="event-form">
+        <input type="date" id="date" required />
+        <input type="text" placeholder="Locatie" id="location" required />
+        <input type="text" placeholder="Adres" id="address" />
+        <input type="url" placeholder="Ticket link (https://...)" id="ticket-link" />
+        <button type="submit">Opslaan</button>
+    </form>
+
+    <h2>Bestaande events</h2>
+    <div id="admin-events-list"></div>
+
+    <script src="script.js"></script>
+    <script>
+    const form = document.getElementById('event-form');
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        const date = document.getElementById('date').value;
+        const location = document.getElementById('location').value;
+        const address = document.getElementById('address').value;
+        const ticketLink = document.getElementById('ticket-link').value;
+
+        fetch('/api/events', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ date, location, address, ticketLink })
+        }).then(() => {
+            loadAdminEvents();
+            form.reset();
+        });
+    });
+
+    function loadAdminEvents() {
+        fetch('/api/events')
+            .then(res => res.json())
+            .then(events => {
+                const container = document.getElementById('admin-events-list');
+                container.innerHTML = '';
+                events.sort((a,b) => new Date(a.date) - new Date(b.date));
+                events.forEach(e => {
+                    const div = document.createElement('div');
+                    div.className = 'admin-event';
+                    div.innerHTML = `
+                        <span>${new Date(e.date).toLocaleDateString('nl-NL')} – ${e.location}</span>
+                        <button class="delete-btn">Verwijder</button>
+                    `;
+                    div.querySelector('.delete-btn').onclick = () => {
+                        fetch(`/api/events/${e.id}`, { method: 'DELETE' })
+                            .then(() => loadAdminEvents());
+                    };
+                    container.appendChild(div);
+                });
+            });
+    }
+
+    loadAdminEvents();
+    </script>
+</body>
+</html>
