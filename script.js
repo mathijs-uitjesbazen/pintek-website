@@ -1,4 +1,4 @@
-fetch('/api/events')
+fetch('events.json')
     .then(res => res.json())
     .then(events => {
         const container = document.getElementById('events-container');
